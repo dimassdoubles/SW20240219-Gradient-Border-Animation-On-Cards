@@ -7,15 +7,29 @@
 
 import SwiftUI
 
+enum UIState {
+    case A, B, C
+}
+//
 struct ContentView: View {
+    @State private var currentUIState: UIState = .A
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        VStack{
+            if currentUIState == .A {
+                ButtonA().onTapGesture {
+                    currentUIState = .B
+                }
+            } else if currentUIState == .B {
+                ButtonB().onTapGesture {
+                    currentUIState = .C
+                }
+            } else if currentUIState == .C {
+                ButtonC().onTapGesture {
+                    currentUIState = .A
+                }
+            }
         }
-        .padding()
     }
 }
 
